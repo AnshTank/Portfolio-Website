@@ -8,51 +8,7 @@ import Link from "next/link";
 const HeroSection = () => {
   const [transform, setTransform] = useState("rotateY(0deg) rotateX(0deg)");
   return (
-    <section className="relative px-4 py-24 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 opacity-30">
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 1000 1000"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop
-                offset="0%"
-                stopColor="oklch(0.75 0.28 280)"
-                stopOpacity="0.1"
-              />
-              <stop
-                offset="100%"
-                stopColor="oklch(0.72 0.26 320)"
-                stopOpacity="0.05"
-              />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,200 Q250,100 500,200 T1000,200 L1000,0 L0,0 Z"
-            fill="url(#grad1)"
-          >
-            <animate
-              attributeName="d"
-              dur="20s"
-              repeatCount="indefinite"
-              values="M0,200 Q250,100 500,200 T1000,200 L1000,0 L0,0 Z;M0,300 Q250,200 500,100 T1000,300 L1000,0 L0,0 Z;M0,200 Q250,100 500,200 T1000,200 L1000,0 L0,0 Z"
-            />
-          </path>
-          <path
-            d="M0,1000 Q250,900 500,800 T1000,900 L1000,1000 Z"
-            fill="url(#grad1)"
-          >
-            <animate
-              attributeName="d"
-              dur="25s"
-              repeatCount="indefinite"
-              values="M0,1000 Q250,900 500,800 T1000,900 L1000,1000 Z;M0,1000 Q250,800 500,900 T1000,800 L1000,1000 Z;M0,1000 Q250,900 500,800 T1000,900 L1000,1000 Z"
-            />
-          </path>
-        </svg>
-      </div>
+    <section className="relative px-4 py-24 md:py-32">
       <div className="container max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="space-y-8 fade-in-up">

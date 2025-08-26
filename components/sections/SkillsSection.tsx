@@ -68,7 +68,7 @@ const SkillsSection = () => {
     },
   ];
   return (
-    <section id="skills" className="px-4 py-24 relative overflow-hidden">
+    <section id="skills" className="px-4 py-24 relative overflow-hidden bg-background/[0.6] backdrop-blur-sm">
       {/* Subtle Background */}
       <div className="absolute inset-0">
         {[
@@ -118,11 +118,16 @@ const SkillsSection = () => {
               {skillLayers.map((layer, index) => (
                 <button
                   key={index}
-                  onClick={() => setActiveLayer(index)}
-                  className={`px-4 py-2 text-xs font-mono border transition-all duration-300 ${
+                  onClick={() => {
+                    setActiveLayer(index);
+                    // Trigger unique transition effect
+                    const button = document.activeElement as HTMLElement;
+                    button?.blur();
+                  }}
+                  className={`px-4 py-2 text-xs font-mono border transition-all duration-500 transform hover:scale-105 ${
                     activeLayer === index
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-muted text-muted-foreground hover:border-primary/50"
+                      ? "border-primary bg-primary/20 text-primary shadow-lg shadow-primary/25 scale-105"
+                      : "border-muted text-muted-foreground hover:border-primary/50 hover:bg-primary/5"
                   }`}
                   suppressHydrationWarning
                 >
@@ -156,10 +161,12 @@ const SkillsSection = () => {
                 {skillLayers[activeLayer].skills.map((skill, index) => (
                   <div
                     key={skill.name}
-                    className="absolute transition-all duration-300 group cursor-pointer"
+                    className="absolute transition-all duration-500 group cursor-pointer animate-in fade-in slide-in-from-bottom-4"
                     style={{
                       left: `${skill.x * 16.66}%`,
                       top: `${skill.y * 25}%`,
+                      animationDelay: `${index * 100}ms`,
+                      animationFillMode: 'both'
                     }}
                     onMouseEnter={() => setHoveredSkill(skill.name)}
                     onMouseLeave={() => setHoveredSkill(null)}
@@ -187,14 +194,13 @@ const SkillsSection = () => {
 
                     {/* Main Node */}
                     <div
-                      className="relative w-20 h-20 rounded-full border-2 bg-background/95 backdrop-blur-sm flex flex-col items-center justify-center group-hover:scale-110 group-hover:shadow-2xl transition-all duration-300"
+                      className="relative w-20 h-20 rounded-full border-2 bg-white/95 dark:bg-background/95 backdrop-blur-sm flex flex-col items-center justify-center group-hover:scale-110 group-hover:shadow-2xl transition-all duration-300"
                       style={{
                         borderColor: skill.color,
-                        backgroundColor: `${skill.color}08`,
                         boxShadow:
                           hoveredSkill === skill.name
-                            ? `0 0 30px ${skill.color}60`
-                            : `0 0 10px ${skill.color}20`,
+                            ? `0 0 30px ${skill.color}60, inset 0 0 20px ${skill.color}10`
+                            : `0 0 10px ${skill.color}20, inset 0 0 10px ${skill.color}05`,
                       }}
                     >
                       <div className="text-foreground font-mono text-xs font-bold text-center leading-tight">

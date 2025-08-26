@@ -35,7 +35,7 @@
 - **Language**: TypeScript 5
 - **Build Tool**: Next.js with Turbopack
 - **Linting**: ESLint with Next.js config
-- **Package Manager**: npm/pnpm
+- **Package Manager**: npm
 
 ## 📁 Project Structure
 
@@ -78,7 +78,7 @@ ansh-portfolio/
 ### Prerequisites
 
 - Node.js 18+
-- npm or pnpm
+- npm
 - MongoDB (for contact form)
 
 ### Installation
@@ -94,8 +94,6 @@ ansh-portfolio/
 
    ```bash
    npm install --legacy-peer-deps
-   # or
-   pnpm install
    ```
 
 3. **Set up environment variables**
@@ -110,8 +108,6 @@ ansh-portfolio/
 
    ```bash
    npm run dev
-   # or
-   pnpm dev
    ```
 
 5. **Open your browser**
