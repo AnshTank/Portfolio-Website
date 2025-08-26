@@ -1,0 +1,20 @@
+[33m9ff3a19[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Implement super optimization: service worker caching, preloading, enhanced loading screen
+[33m96bd04e[m Implement ultra-smooth scroll optimizations
+[33m1ff53d7[m Add loading screen and optimize scroll performance
+[33me722c8d[m Optimize performance for mobile and low-end devices
+[33mbb3e9ae[m Merge branch 'main' of https://github.com/AnshTank/Portfolio-Website
+[33m8b5b46c[m Fix descender cutoff with minimal padding
+[33m1ac5825[m Create nextjs.yml
+[33m42f46c6[m Merge branch 'main' of https://github.com/AnshTank/Portfolio-Website
+[33m51a6fb2[m Fix duplicate scripts key in package.json
+[33mc4efefe[m Create azure-staticwebapp.yml
+[33mf7e68da[m Refine hero section: Add subtle hover effects and optimize image display
+[33m2e76b49[m Enhance UI: Remove hero waves, improve skills section with animations and dark mode support
+[33m8797ed5[m Fix npm dependency conflicts and update installation instructions
+[33m456ea98[m Regenerate package-lock.json with correct project name
+[33m87fd680[m Resolve merge conflict and complete v0 reference removal
+[33ma3a5c9c[m Remove v0 references from project
+[33mf3f581c[m Update Readme.md
+[33mcc97294[m Update Readme.md
+[33m72b4079[m Update README and LICENSE with current project structure and tech stack
+[33m88507f7[m Initial commit

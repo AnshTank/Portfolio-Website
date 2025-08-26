@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { Moon, Sun, Code, Sparkles } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
+import { useMobilePerformance } from "@/hooks/use-mobile-performance"
 
 const Header = () => {
   const { theme, setTheme } = useTheme()
+  const { shouldDisableAnimations } = useMobilePerformance()
 
   const navItems = [
     { href: "#about", label: "About" },
@@ -27,7 +28,7 @@ const Header = () => {
             <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
               <Code className="w-6 h-6 text-white" />
             </div>
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full" style={{animation: 'pulse 3s ease-in-out infinite'}}></div>
           </div>
           <div>
             <div className="font-playfair text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -64,7 +65,7 @@ const Header = () => {
           </Button>
           <div className="hidden sm:block w-px h-6 bg-border"></div>
           <div className="hidden sm:flex items-center space-x-1">
-            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+            <Sparkles className={`w-4 h-4 text-primary ${!shouldDisableAnimations ? 'animate-pulse' : ''}`} />
             <span className="text-xs text-muted-foreground">Available for work</span>
           </div>
         </div>

@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import HeroSection from "@/components/sections/HeroSection"
@@ -7,47 +10,59 @@ import SkillsSection from "@/components/sections/SkillsSection"
 import ProjectsSection from "@/components/sections/ProjectsSection"
 import HackathonsSection from "@/components/sections/HackathonsSection"
 import ContactSection from "@/components/sections/ContactSection"
+import LoadingScreen from "@/components/ui/LoadingScreen"
 
 
 export default function Portfolio() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showHero, setShowHero] = useState(false);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+    setTimeout(() => setShowHero(true), 200);
+  };
+
+  if (isLoading) {
+    return <LoadingScreen onComplete={handleLoadingComplete} />;
+  }
+
   return (
     <div className="min-h-screen bg-background flex flex-col relative">
-      {/* Animated Wave Background */}
+      {/* Unique Floating Shapes */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" suppressHydrationWarning>
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="none">
-          <path d="M0,550 Q360,470 720,550 T1440,550 L1440,900 L0,900 Z" fill="url(#waveGrad1)">
-            <animate attributeName="d" dur="6s" repeatCount="indefinite" values="M0,550 Q360,470 720,550 T1440,550 L1440,900 L0,900 Z;M0,570 Q360,490 720,570 T1440,570 L1440,900 L0,900 Z;M0,530 Q360,450 720,530 T1440,530 L1440,900 L0,900 Z;M0,550 Q360,470 720,550 T1440,550 L1440,900 L0,900 Z" />
-          </path>
-          <path d="M0,750 Q480,670 960,750 T1440,750 L1440,900 L0,900 Z" fill="url(#waveGrad2)">
-            <animate attributeName="d" dur="8s" repeatCount="indefinite" values="M0,750 Q480,670 960,750 T1440,750 L1440,900 L0,900 Z;M0,730 Q480,650 960,730 T1440,730 L1440,900 L0,900 Z;M0,770 Q480,690 960,770 T1440,770 L1440,900 L0,900 Z;M0,750 Q480,670 960,750 T1440,750 L1440,900 L0,900 Z" />
-          </path>
-          <defs>
-            <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.02" />
-              <stop offset="50%" stopColor="#06B6D4" stopOpacity="0.015" />
-              <stop offset="100%" stopColor="#1E40AF" stopOpacity="0.01" />
-            </linearGradient>
-            <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0EA5E9" stopOpacity="0.015" />
-              <stop offset="50%" stopColor="#0284C7" stopOpacity="0.01" />
-              <stop offset="100%" stopColor="#1D4ED8" stopOpacity="0.008" />
-            </linearGradient>
-            <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#EC4899" stopOpacity="0.04" />
-              <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.02" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className="absolute top-20 left-12 w-20 h-20 bg-gradient-to-br from-violet-400/5 to-purple-600/4 clip-path-[polygon(50%_0%,_100%_38%,_82%_100%,_18%_100%,_0%_38%)] animate-orbit z-10"></div>
-        <div className="absolute top-40 right-16 w-24 h-24 bg-gradient-to-tr from-cyan-300/4 to-blue-500/3 clip-path-[circle(50%_at_50%_50%)] animate-gentle-pulse z-10" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-60 left-1/4 w-16 h-32 bg-gradient-to-b from-emerald-400/4 to-teal-500/3 clip-path-[polygon(25%_0%,_75%_0%,_100%_100%,_0%_100%)] animate-slide-vertical z-10" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-32 left-1/2 w-18 h-18 bg-gradient-to-l from-pink-400/4 to-rose-500/3 clip-path-[polygon(30%_0%,_70%_0%,_100%_30%,_100%_70%,_70%_100%,_30%_100%,_0%_70%,_0%_30%)] animate-gentle-bounce z-10" style={{animationDelay: '3s'}}></div>
-        <div className="absolute bottom-40 left-8 w-22 h-22 bg-gradient-to-tr from-amber-400/4 to-orange-500/3 clip-path-[polygon(50%_0%,_61%_35%,_98%_35%,_68%_57%,_79%_91%,_50%_70%,_21%_91%,_32%_57%,_2%_35%,_39%_35%)] animate-orbit-reverse z-10" style={{animationDelay: '4s'}}></div>
-        <div className="absolute top-1/3 right-8 w-20 h-28 bg-gradient-to-bl from-indigo-400/4 to-purple-500/3 clip-path-[polygon(0%_20%,_60%_20%,_60%_0%,_100%_50%,_60%_100%,_60%_80%,_0%_80%)] animate-slide-horizontal z-10" style={{animationDelay: '2.5s'}}></div>
+        {/* Triangle */}
+        <div className="absolute top-20 left-12 w-16 h-16 bg-gradient-to-br from-violet-400/6 to-purple-600/4 animate-float-random-1" style={{clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'}}></div>
+        
+        {/* Star */}
+        <div className="absolute top-1/3 left-1/4 w-12 h-12 bg-gradient-to-l from-emerald-400/6 to-teal-500/4 animate-float-random-3" style={{clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)', animationDelay: '4s'}}></div>
+        
+        {/* Diamond */}
+        <div className="absolute top-60 right-1/3 w-14 h-14 bg-gradient-to-bl from-pink-400/6 to-rose-500/4 animate-float-random-1" style={{clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', animationDelay: '1s'}}></div>
+        
+        {/* Hearts scattered */}
+        <div className="absolute bottom-1/4 right-1/6 w-12 h-12 bg-gradient-to-tr from-red-400/6 to-pink-500/4 animate-float-random-2" style={{clipPath: 'polygon(50% 100%, 20% 60%, 20% 40%, 30% 20%, 50% 30%, 70% 20%, 80% 40%, 80% 60%)', animationDelay: '7s'}}></div>
+        
+        {/* Hearts */}
+        <div className="absolute bottom-1/4 right-1/6 w-12 h-12 bg-gradient-to-tr from-red-400/6 to-pink-500/4 animate-float-random-2" style={{clipPath: 'polygon(50% 100%, 20% 60%, 20% 40%, 30% 20%, 50% 30%, 70% 20%, 80% 40%, 80% 60%)', animationDelay: '7s'}}></div>
+        
+        <div className="absolute top-1/4 right-1/2 w-8 h-8 bg-gradient-to-tr from-pink-400/5 to-rose-500/3 animate-float-random-1" style={{clipPath: 'polygon(50% 100%, 20% 60%, 20% 40%, 30% 20%, 50% 30%, 70% 20%, 80% 40%, 80% 60%)', animationDelay: '2.5s'}}></div>
+        
+        {/* Hexagon */}
+        <div className="absolute top-40 right-16 w-20 h-20 bg-gradient-to-tr from-cyan-300/6 to-blue-500/4 animate-float-random-2" style={{clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)', animationDelay: '2s'}}></div>
+        
+        {/* Pentagon */}
+        <div className="absolute bottom-1/3 left-1/6 w-10 h-10 bg-gradient-to-r from-indigo-400/6 to-blue-600/4 animate-float-random-3" style={{clipPath: 'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)', animationDelay: '5s'}}></div>
       </div>
+      
       <Header />
+      
       <main className="flex-1 relative z-10">
-        <HeroSection />
+        {showHero ? (
+          <HeroSection />
+        ) : (
+          <div className="h-screen" />
+        )}
+        
         <ConnectSection />
         <AboutSection />
         <SkillsSection />
@@ -55,6 +70,7 @@ export default function Portfolio() {
         <HackathonsSection />
         <ContactSection />
       </main>
+      
       <Footer />
     </div>
   )

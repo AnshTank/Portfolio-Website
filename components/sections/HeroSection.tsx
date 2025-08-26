@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Mail, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const HeroSection = () => {
-  const [transform, setTransform] = useState("rotateY(0deg) rotateX(0deg)");
   return (
     <section className="relative px-4 py-24 md:py-32">
       <div className="container max-w-7xl mx-auto relative z-10">
@@ -61,11 +60,16 @@ const HeroSection = () => {
             className="relative flex justify-end items-center"
             style={{ perspective: "1000px" }}
           >
-            <div className="relative w-[280px] sm:w-[350px] lg:w-[450px] h-[350px] sm:h-[450px] lg:h-[600px] mx-auto lg:mx-0 overflow-hidden group cursor-pointer">
-              <img
+            <div className="relative w-[280px] sm:w-[350px] lg:w-[450px] h-[350px] sm:h-[450px] lg:h-[600px] mx-auto lg:mx-0 overflow-hidden group">
+              <Image
                 src="/Ansh-model.png"
                 alt="Ansh Tank - Hero"
-                className="relative w-full h-full object-contain animate-[heroLanding_1.5s_ease-out_0.3s_both] drop-shadow-[0_8px_25px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_8px_25px_rgba(168,85,247,0.4)] transition-all duration-300 group-hover:scale-[1.02]" 
+                width={450}
+                height={600}
+                priority
+                quality={90}
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 350px, 450px"
+                className="relative w-full h-full object-contain animate-[heroLanding_1.5s_ease-out_0.3s_both] gpu-accelerated transition-all duration-500 ease-out group-hover:scale-105 drop-shadow-[0_8px_25px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_12px_35px_rgba(168,85,247,0.3)]" 
                 style={{ backgroundColor: 'transparent' }}
               />
             </div>
