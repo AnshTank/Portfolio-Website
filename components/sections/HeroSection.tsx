@@ -61,26 +61,12 @@ const HeroSection = () => {
             className="relative flex justify-end items-center"
             style={{ perspective: "1000px" }}
           >
-            <div
-              className="relative w-[280px] sm:w-[350px] lg:w-[450px] h-[350px] sm:h-[450px] lg:h-[600px] group cursor-pointer transition-transform duration-300 ease-out mx-auto lg:mx-0"
-              style={{ transform }}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x =
-                  ((e.clientX - rect.left - rect.width / 2) / rect.width) * 15;
-                const y =
-                  ((e.clientY - rect.top - rect.height / 2) / rect.height) * 15;
-                setTransform(`rotateY(${x}deg) rotateX(${-y}deg)`);
-              }}
-              onMouseLeave={() => {
-                setTransform("rotateY(0deg) rotateX(0deg)");
-              }}
-            >
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black/5 rounded-full blur-sm"></div>
+            <div className="relative w-[280px] sm:w-[350px] lg:w-[450px] h-[350px] sm:h-[450px] lg:h-[600px] mx-auto lg:mx-0 overflow-hidden group cursor-pointer">
               <img
                 src="/Ansh-model.png"
-                alt="Ansh Tank - Ghibli Style"
-                className="relative w-full h-full object-contain drop-shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:drop-shadow-[0_12px_35px_rgba(168,85,247,0.2)]"
+                alt="Ansh Tank - Hero"
+                className="relative w-full h-full object-contain animate-[heroLanding_1.5s_ease-out_0.3s_both] drop-shadow-[0_8px_25px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_8px_25px_rgba(168,85,247,0.4)] transition-all duration-300 group-hover:scale-[1.02]" 
+                style={{ backgroundColor: 'transparent' }}
               />
             </div>
           </div>

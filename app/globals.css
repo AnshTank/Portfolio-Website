@@ -597,6 +597,11 @@
 .animate-bounce-slow { animation: bounce 6s ease-in-out infinite; }
 .animate-ping-slow { animation: ping 5s ease-in-out infinite; }
 .animate-pulse-code { animation: pulse 3s ease-in-out infinite; }
+
+/* Hero Landing Effect */
+.animate-hero-landing {
+  animation: heroLanding 2s ease-out 0.5s both;
+}
 /* Peaceful ASMR-like Animations */
 .animate-peaceful-float {
   animation: peaceful-float 12s ease-in-out infinite;
@@ -671,6 +676,22 @@
   }
   66% {
     background-position: 5% 10%, 95% 90%, 55% 95%;
+  }
+}
+
+/* Hero Landing Animation */
+@keyframes heroLanding {
+  0% {
+    transform: translateY(-30px) scale(0.95);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(5px) scale(1.02);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
   }
 }
 
