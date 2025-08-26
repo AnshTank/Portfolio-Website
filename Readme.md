@@ -1,4 +1,3 @@
-```markdown
 # Ansh Tank - Personal Portfolio
 
 > A modern, responsive portfolio website showcasing my journey as a Full-Stack Developer and DevOps Engineer.
@@ -17,6 +16,7 @@
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Framework**: Next.js 15.2.4 (React 19)
 - **Styling**: Tailwind CSS 4.1.9 with custom animations
 - **UI Components**: Radix UI primitives
@@ -25,11 +25,13 @@
 - **Theme**: Next-themes for dark/light mode
 
 ### Backend & Database
+
 - **Database**: MongoDB 6.18.0
 - **API Routes**: Next.js API routes
 - **Form Handling**: React Hook Form with Zod validation
 
 ### Development Tools
+
 - **Language**: TypeScript 5
 - **Build Tool**: Next.js with Turbopack
 - **Linting**: ESLint with Next.js config
@@ -74,19 +76,22 @@ ansh-portfolio/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or pnpm
 - MongoDB (for contact form)
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/AnshTank/ansh-portfolio.git
    cd ansh-portfolio
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -94,12 +99,15 @@ ansh-portfolio/
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.local.example .env.local
    ```
+
    Add your MongoDB connection string and other required variables.
 
 4. **Run the development server**
+
    ```bash
    npm run dev
    # or
@@ -149,8 +157,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ---
 
 ⭐ **Star this repository if you found it helpful!**
-
-```
-
-
-```

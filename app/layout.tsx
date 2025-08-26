@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: "Ansh Tank - Full-Stack Developer & DevOps Engineer",
   description:
     "Passionate Full-Stack Developer and aspiring DevOps Engineer specializing in React, Node.js, MongoDB, Docker, and Kubernetes. Building real-world solutions with creativity and reliability.",
-  generator: "v0.app",
+
 }
 
 export default function RootLayout({
