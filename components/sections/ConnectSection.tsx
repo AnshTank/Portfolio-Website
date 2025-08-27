@@ -57,7 +57,7 @@ const ConnectSection = () => {
                 className="block"
               >
                 <Card
-                  className={`card-hover group cursor-pointer border-${link.color}/20 hover:border-${link.hoverColor} ${
+                  className={`card-hover group cursor-pointer border-${link.color}/20 hover:border-${link.hoverColor} hover:scale-105 transition-transform duration-200 ${
                     link.name === "Buy Me Coffee"
                       ? "bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border-yellow-500/30 hover:border-yellow-500/50"
                       : ""
@@ -68,9 +68,9 @@ const ConnectSection = () => {
                       className={`w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-${link.color}/20 to-${link.color.replace(
                         "500",
                         "600",
-                      )}/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform`}
+                      )}/10 rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
                     >
-                      <link.icon className={`w-6 h-6 text-${link.color}`} />
+                      <link.icon className={`w-6 h-6 text-${link.color} group-hover:animate-bounce`} />
                     </div>
                     <h3
                       className={`font-semibold text-sm ${

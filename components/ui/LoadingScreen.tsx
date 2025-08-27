@@ -54,7 +54,7 @@ export default function LoadingScreen({
       const target = chunks[chunkIndex].target;
       const startProgress =
         chunkIndex === 0 ? 0 : chunks[chunkIndex - 1].target;
-      const duration = 1000 + (chunkIndex * 200);
+      const duration = 1000 + chunkIndex * 200;
       const startTime = Date.now();
 
       const animate = () => {
@@ -84,44 +84,139 @@ export default function LoadingScreen({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-background via-background to-primary/5">
-      {/* Animated particles */}
+      {/* Neural Network Background */}
       <div className="absolute inset-0 overflow-hidden">
-        {mounted &&
-          [...Array(40)].map((_, i) => {
-            const left = (i * 11.7) % 100;
-            const top = (i * 8.3) % 100;
-            const delay = (i * 0.18) % 5;
-            const duration = 3 + (i % 4);
-            return (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-primary/70 rounded-full"
-                style={{
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  animation: `smoothGlow ${duration}s ease-in-out infinite`,
-                  animationDelay: `${delay}s`,
-                }}
-              />
-            );
-          })}
-      </div>
-
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-20">
+        {/* Animated gradient mesh */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: `
-            linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px)
+            background: `
+            radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 10% 60%, rgba(245, 158, 11, 0.08) 0%, transparent 35%),
+            radial-gradient(circle at 90% 40%, rgba(239, 68, 68, 0.08) 0%, transparent 35%)
           `,
-            backgroundSize: "50px 50px",
+            animation: "meshMove 15s ease-in-out infinite alternate",
           }}
         ></div>
+
+        {/* Floating tech elements */}
+        <div suppressHydrationWarning>
+          {mounted &&
+            [...Array(16)].map((_, i) => {
+              const elements = [
+                "⚡",
+                "🚀",
+                "💻",
+                "⚙️",
+                "🔧",
+                "📱",
+                "🌐",
+                "💡",
+                "🔍",
+                "📊",
+                "🔒",
+                "🌍",
+                "📶",
+                "✨",
+                "🔥",
+                "🎨",
+              ];
+              const element = elements[i % elements.length];
+              const positions = [
+                { left: 8, top: 15 },
+                { left: 85, top: 12 },
+                { left: 25, top: 8 },
+                { left: 70, top: 25 },
+                { left: 15, top: 35 },
+                { left: 90, top: 40 },
+                { left: 45, top: 30 },
+                { left: 65, top: 45 },
+                { left: 10, top: 60 },
+                { left: 80, top: 65 },
+                { left: 35, top: 55 },
+                { left: 55, top: 70 },
+                { left: 20, top: 80 },
+                { left: 75, top: 85 },
+                { left: 40, top: 75 },
+                { left: 60, top: 90 },
+              ];
+              const pos = positions[i] || {
+                left: Math.random() * 80 + 10,
+                top: Math.random() * 80 + 10,
+              };
+              return (
+                <div
+                  key={i}
+                  className="absolute text-xl opacity-8"
+                  style={{
+                    left: `${pos.left}%`,
+                    top: `${pos.top}%`,
+                    animation: `techFloat ${
+                      10 + (i % 4)
+                    }s ease-in-out infinite`,
+                    animationDelay: `${i * 0.8}s`,
+                  }}
+                >
+                  {element}
+                </div>
+              );
+            })}
+        </div>
+
+        {/* Circuit lines */}
+        <div suppressHydrationWarning>
+          <svg
+            className="absolute inset-0 w-full h-full opacity-15"
+            style={{ animation: "circuitPulse 8s ease-in-out infinite" }}
+          >
+            <defs>
+              <linearGradient
+                id="circuitGrad"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stopColor="rgba(168, 85, 247, 0.2)" />
+                <stop offset="100%" stopColor="rgba(236, 72, 153, 0.2)" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 50 Q200 100 400 50 T800 100 L1200 80"
+              stroke="url(#circuitGrad)"
+              strokeWidth="2"
+              fill="none"
+            />
+            <path
+              d="M0 200 Q300 150 500 200 T900 150 L1200 180"
+              stroke="url(#circuitGrad)"
+              strokeWidth="2"
+              fill="none"
+            />
+            <path
+              d="M50 0 Q100 200 150 400 T250 800"
+              stroke="url(#circuitGrad)"
+              strokeWidth="2"
+              fill="none"
+            />
+            <path
+              d="M300 0 Q350 250 400 500 T500 1000"
+              stroke="url(#circuitGrad)"
+              strokeWidth="2"
+              fill="none"
+            />
+            <circle cx="200" cy="100" r="4" fill="rgba(168, 85, 247, 0.3)" />
+            <circle cx="500" cy="200" r="4" fill="rgba(236, 72, 153, 0.3)" />
+            <circle cx="150" cy="400" r="4" fill="rgba(59, 130, 246, 0.3)" />
+            <circle cx="400" cy="500" r="4" fill="rgba(34, 197, 94, 0.3)" />
+          </svg>
+        </div>
       </div>
 
-      <div className="relative z-10 text-center space-y-8 px-8">
+      <div className="relative z-10 text-center space-y-8 px-8 bg-background/80 backdrop-blur-sm rounded-2xl border border-primary/10 shadow-2xl max-w-md mx-auto py-12">
         {/* Futuristic Logo */}
         <div className="flex items-center justify-center space-x-4 mb-8">
           <div className="relative">
@@ -164,20 +259,6 @@ export default function LoadingScreen({
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/40 animate-pulse"></div>
               </div>
             </div>
-
-            {/* Progress indicators */}
-            <div className="absolute -top-1 left-0 w-full flex justify-between">
-              {chunks.map((_, i) => (
-                <div
-                  key={i}
-                  className={`w-2 h-2 rounded-full border-2 ${
-                    i <= currentChunk
-                      ? "bg-primary border-primary"
-                      : "bg-muted border-muted"
-                  }`}
-                />
-              ))}
-            </div>
           </div>
 
           <div className="flex justify-between items-center">
@@ -193,37 +274,67 @@ export default function LoadingScreen({
           </div>
         </div>
 
-        {/* Orbital Ball Loader */}
+        {/* Smooth Pulse Loader */}
         <div className="relative w-16 h-16 mx-auto">
-          <div className="absolute inset-0 border border-primary/20 rounded-full"></div>
-          {[...Array(6)].map((_, i) => (
+          <div className="absolute inset-0 rounded-full border-2 border-primary/30"></div>
+          <div className="absolute inset-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 animate-pulse"></div>
+          <div className="absolute inset-0 rounded-full border-2 border-primary overflow-hidden">
             <div
-              key={i}
-              className="absolute inset-0 animate-spin"
+              className="w-full bg-primary transition-all duration-300 ease-out"
               style={{
-                animationDuration: '4s',
-                animationDelay: `${i * 0.67}s`
+                height: `${progress}%`,
+                position: "absolute",
+                bottom: 0,
+                borderRadius: "50%",
               }}
-            >
-              <div
-                className="absolute w-2 h-2 bg-primary/60 rounded-full shadow-sm"
-                style={{
-                  left: '50%',
-                  top: '2px',
-                  transform: 'translateX(-50%)'
-                }}
-              />
-            </div>
-          ))}
-          <div className="absolute inset-4 bg-primary/10 rounded-full animate-pulse"></div>
+            ></div>
+          </div>
+          <div
+            className="absolute inset-4 rounded-full bg-primary/10 animate-pulse"
+            style={{ animationDuration: "2s" }}
+          ></div>
         </div>
-
       </div>
-      
+
       <style jsx>{`
         @keyframes smoothGlow {
-          0%, 100% { opacity: 0.2; transform: scale(0.8); }
-          50% { opacity: 1; transform: scale(1.2); }
+          0%,
+          100% {
+            opacity: 0.2;
+            transform: scale(0.8);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.2);
+          }
+        }
+        @keyframes meshMove {
+          0% {
+            transform: scale(1) rotate(0deg);
+          }
+          100% {
+            transform: scale(1.1) rotate(5deg);
+          }
+        }
+        @keyframes techFloat {
+          0%,
+          100% {
+            transform: translateY(0px) rotate(0deg);
+            opacity: 0.1;
+          }
+          50% {
+            transform: translateY(-20px) rotate(10deg);
+            opacity: 0.3;
+          }
+        }
+        @keyframes circuitPulse {
+          0%,
+          100% {
+            opacity: 0.1;
+          }
+          50% {
+            opacity: 0.3;
+          }
         }
       `}</style>
     </div>
