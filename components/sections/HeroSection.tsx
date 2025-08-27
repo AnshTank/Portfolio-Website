@@ -60,7 +60,24 @@ const HeroSection = () => {
             className="relative flex justify-end items-center"
             style={{ perspective: "1000px" }}
           >
-            <div className="relative w-[280px] sm:w-[350px] lg:w-[450px] h-[350px] sm:h-[450px] lg:h-[600px] mx-auto lg:mx-0 overflow-hidden group">
+            <div className="relative w-[280px] sm:w-[350px] lg:w-[450px] h-[350px] sm:h-[450px] lg:h-[600px] mx-auto lg:mx-0 group">
+              {/* Glow layer - duplicate image with light blue glow */}
+              <Image
+                src="/Ansh-model.png"
+                alt=""
+                width={450}
+                height={600}
+                priority
+                quality={90}
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 350px, 450px"
+                className="absolute w-full h-full object-contain opacity-0 group-hover:opacity-60 transition-opacity duration-[800ms] ease-in-out"
+                style={{
+                  filter:
+                    "blur(15px) brightness(1.2) drop-shadow(0 0 12px #22d3ee)",
+                  transform: "scale(1.05)",
+                }}
+              />
+              {/* Main image */}
               <Image
                 src="/Ansh-model.png"
                 alt="Ansh Tank - Hero"
@@ -69,8 +86,10 @@ const HeroSection = () => {
                 priority
                 quality={90}
                 sizes="(max-width: 640px) 280px, (max-width: 1024px) 350px, 450px"
-                className="relative w-full h-full object-contain animate-[heroLanding_1.5s_ease-out_0.3s_both] gpu-accelerated transition-all duration-500 ease-out group-hover:scale-105 drop-shadow-[0_8px_25px_rgba(0,0,0,0.15)] group-hover:drop-shadow-[0_12px_35px_rgba(168,85,247,0.3)]" 
-                style={{ backgroundColor: 'transparent' }}
+                className="relative w-full h-full object-contain animate-[heroLanding_1.5s_ease-out_0.3s_both] transition-all duration-[800ms] ease-in-out group-hover:scale-[1.03] drop-shadow-[0_8px_25px_rgba(0,0,0,0.15)] z-10"
+                style={{
+                  backgroundColor: "transparent",
+                }}
               />
             </div>
           </div>
