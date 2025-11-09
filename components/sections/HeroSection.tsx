@@ -32,7 +32,7 @@ const HeroSection = () => {
                 className="group px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto"
                 onClick={() =>
                   window.open(
-                    "https://rendercv-sb2nov-theme-3.tiiny.site",
+                    "https://pink-kimberlyn-57.tiiny.site/",
                     "_blank"
                   )
                 }
