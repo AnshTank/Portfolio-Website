@@ -1,26 +1,6 @@
 "use client"
 
-import { Metadata } from "next"
 import { useState } from "react"
-
-export const metadata: Metadata = {
-  title: "Hire Me - Ansh Tank",
-  description: "Ready to work with Ansh Tank? Submit your project details and get a personalized proposal for web development, DevOps, and full-stack solutions.",
-  keywords: [
-    "Hire Ansh Tank",
-    "Freelance Developer",
-    "Web Development Services",
-    "DevOps Consultant",
-    "Full-Stack Developer for Hire",
-    "React Developer",
-    "Node.js Developer"
-  ],
-  openGraph: {
-    title: "Hire Me - Ansh Tank",
-    description: "Ready to work with Ansh Tank? Get a personalized proposal for your next project.",
-    url: "https://anshtank.me/hire",
-  },
-};
 import { Send, User, Mail, Phone, Building, Calendar, DollarSign, FileText, Clock, MapPin, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"

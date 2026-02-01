@@ -1,28 +1,6 @@
 "use client";
 
-import { Metadata } from "next";
 import { useState } from "react";
-
-export const metadata: Metadata = {
-  title: "Projects - Ansh Tank Portfolio",
-  description: "Explore Ansh Tank's complete portfolio of innovative web applications including ConsultBridge, HOP-11, MindMingle, and more. Full-stack projects built with React, Node.js, and modern technologies.",
-  keywords: [
-    "Ansh Tank Projects",
-    "Full-Stack Projects", 
-    "React Projects",
-    "Node.js Applications",
-    "ConsultBridge",
-    "HOP-11",
-    "MindMingle",
-    "Vacation Rental App",
-    "Portfolio Projects"
-  ],
-  openGraph: {
-    title: "Projects - Ansh Tank Portfolio",
-    description: "Explore innovative web applications and full-stack projects by Ansh Tank",
-    url: "https://anshtank.me/projects",
-  },
-};
 import {
   ExternalLink,
   Github,
