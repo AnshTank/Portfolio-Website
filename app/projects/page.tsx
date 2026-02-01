@@ -1,6 +1,28 @@
 "use client";
 
+import { Metadata } from "next";
 import { useState } from "react";
+
+export const metadata: Metadata = {
+  title: "Projects - Ansh Tank Portfolio",
+  description: "Explore Ansh Tank's complete portfolio of innovative web applications including ConsultBridge, HOP-11, MindMingle, and more. Full-stack projects built with React, Node.js, and modern technologies.",
+  keywords: [
+    "Ansh Tank Projects",
+    "Full-Stack Projects", 
+    "React Projects",
+    "Node.js Applications",
+    "ConsultBridge",
+    "HOP-11",
+    "MindMingle",
+    "Vacation Rental App",
+    "Portfolio Projects"
+  ],
+  openGraph: {
+    title: "Projects - Ansh Tank Portfolio",
+    description: "Explore innovative web applications and full-stack projects by Ansh Tank",
+    url: "https://anshtank.me/projects",
+  },
+};
 import {
   ExternalLink,
   Github,
@@ -54,7 +76,30 @@ const ProjectsPage = () => {
         "https://consult-bridge-git-main-ansh-tanks-projects.vercel.app?_vercel_share=myesbSodRCw87s8b3Vg8VEtqnwsHjlmE",
       githubUrl: "https://github.com/AnshTank/ConsultBridge",
     },
-
+    {
+      title: "Never Break The Chain - MNZD Habit Tracker",
+      description:
+        "Revolutionary habit tracking application that transforms daily consistency into extraordinary results through the innovative MNZD methodology. Features include visual progress tracking, GitHub-style heatmaps, and comprehensive analytics.",
+      tech: [
+        "Next.js",
+        "TypeScript",
+        "MongoDB",
+        "JWT Auth",
+        "Framer Motion",
+        "Recharts",
+      ],
+      image: "/images/hero-chain.png",
+      liveUrl: "https://never-break-the-chain.vercel.app",
+      githubUrl: "https://github.com/AnshTank/Never-Break-The-Chain",
+    },
+    {
+      title: "Vacant - Property Management",
+      description:
+        "Modern property management platform for vacation rentals. Features include property listings, booking management, real-time availability, secure payments, and comprehensive dashboard for property owners.",
+      tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT", "Socket.io"],
+      image: "/vacation-rental-dashboard (2).png",
+      githubUrl: "https://github.com/AnshTank/Vacation-Rental-App",
+    },
     {
       title: "HOP-11: Nurse Handoff Companion",
       description:
@@ -71,34 +116,20 @@ const ProjectsPage = () => {
       liveUrl: "https://hop-q77u-git-main-ansh-tanks-projects.vercel.app",
       githubUrl: "https://github.com/AnshTank/HOP",
     },
-
     {
       title: "MindMingle",
       description:
         "Social networking platform focused on mental wellness and community support. Features include user profiles, discussion boards, and real-time chat functionality using React, Node.js, and MongoDB.",
       tech: ["React", "Node.js", "MongoDB", "Socket.io"],
       image: "/MindMingle-dashboard.png",
-      // liveUrl: "https://demo-mindmingle.vercel.app",
       githubUrl: "https://github.com/AnshTank/MindMingle",
     },
-
-    {
-      title: "Vacation Rental App",
-      description:
-        "Full-stack property booking platform allowing users to browse, filter, and book vacation rentals. Features include user authentication, real-time availability, and secure payments using React, Node.js, and MongoDB.",
-      tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT"],
-      image: "/vacation-rental-dashboard (2).png",
-      // liveUrl: "https://demo-vacationrental.vercel.app",
-      githubUrl: "https://github.com/AnshTank/Vacation-Rental-App",
-    },
-
     {
       title: "Financial Literacy Platform",
       description:
         "Web application focused on financial education for women and young people. Features include interactive modules on budgeting, saving, investing, virtual trading simulations, expert guidance, and subscription-based mentorship using React and Node.js.",
       tech: ["React", "Node.js", "MongoDB", "Stripe", "Virtual Trading"],
       image: "/financial-literacy-dashboard (2).png",
-      // liveUrl: "https://demo-financialliteracy.vercel.app",
       githubUrl: "https://github.com/anshtank/financial-literacy-platform",
     },
   ];
