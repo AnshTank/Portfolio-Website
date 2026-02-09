@@ -4,6 +4,7 @@ import { Moon, Sun, Code, Sparkles } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { useMobilePerformance } from "@/hooks/use-mobile-performance"
+import Image from "next/image"
 
 const Header = () => {
   const { theme, setTheme } = useTheme()
@@ -19,22 +20,20 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" suppressHydrationWarning>
-      <div className="container max-w-7xl mx-auto flex h-20 sm:h-24 items-center justify-between px-4 sm:px-6">
+      <div className="container max-w-7xl mx-auto flex h-16 sm:h-18 items-center justify-between px-4 sm:px-6">
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200"
+          className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-200"
         >
           <div className="relative">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
-              <Code className="w-6 h-6 text-white" />
-            </div>
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full" style={{animation: 'pulse 3s ease-in-out infinite'}}></div>
+            <Image src="/ansh-cari.png" alt="Logo" width={60} height={60} className="object-contain rounded-xl" priority />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full" style={{animation: 'pulse 3s ease-in-out infinite'}}></div>
           </div>
           <div>
-            <div className="font-playfair text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <div className="font-playfair text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Ansh Tank
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground font-source-sans tracking-wide">Full-Stack • DevOps</div>
+            <div className="text-xs text-muted-foreground font-source-sans tracking-wide">Full-Stack • DevOps</div>
           </div>
         </button>
 

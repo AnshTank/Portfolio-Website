@@ -59,7 +59,8 @@ export default function Portfolio() {
         <div
           className="absolute bottom-1/4 left-20 w-14 h-14 bg-gradient-to-tr from-purple-400/8 to-violet-500/5 animate-float-random-1"
           style={{
-            clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+            clipPath:
+              "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
             animationDelay: "6s",
           }}
         ></div>

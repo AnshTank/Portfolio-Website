@@ -1,17 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const SkillsSection = () => {
   const [activeLayer, setActiveLayer] = useState(0);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    setIsMobile(!window.matchMedia("(hover: hover)").matches);
+    const checkMobile = !window.matchMedia("(hover: hover)").matches;
+    const checkReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setIsMobile(checkMobile);
+    setReducedMotion(checkReducedMotion);
   }, []);
 
-  const skillLayers = [
+  const shouldAnimate = useMemo(() => !isMobile && !reducedMotion, [isMobile, reducedMotion]);
+
+  const skillLayers = useMemo(() => [
     {
       name: "CORE STACK",
       skills: [
@@ -71,7 +77,8 @@ const SkillsSection = () => {
         { name: "OOP", level: 80, x: 4, y: 1, color: "#4ecdc4" },
       ],
     },
-  ];
+  ], []);
+  
   return (
     <>
       <style jsx>{`
@@ -91,7 +98,7 @@ const SkillsSection = () => {
         className="px-4 py-24 relative overflow-hidden bg-background/[0.6] backdrop-blur-sm"
       >
         {/* Background - No animations on mobile */}
-        {!isMobile && (
+        {shouldAnimate && (
           <div className="absolute inset-0">
             {[
               { left: 10, top: 20, delay: 0 },
@@ -143,27 +150,25 @@ const SkillsSection = () => {
                     key={index}
                     onClick={() => {
                       setActiveLayer(index);
-                      // Trigger unique transition effect
-                      const button = document.activeElement as HTMLElement;
-                      button?.blur();
                     }}
                     className={`px-4 py-2 text-xs font-mono border ${
-                      isMobile
-                        ? ""
-                        : "transition-all duration-700 ease-out transform hover:scale-105"
+                      shouldAnimate
+                        ? "transition-all duration-300 ease-out transform hover:scale-105"
+                        : ""
                     } ${
                       activeLayer === index
                         ? `border-primary bg-primary/20 text-primary ${
-                            !isMobile
+                            shouldAnimate
                               ? "shadow-lg shadow-primary/25 scale-105"
                               : ""
                           }`
                         : `border-muted text-muted-foreground ${
-                            !isMobile
+                            shouldAnimate
                               ? "hover:border-primary/50 hover:bg-primary/5"
                               : ""
                           }`
                     }`}
+                    style={{ transform: 'translate3d(0, 0, 0)' }}
                     suppressHydrationWarning
                   >
                     {layer.name}
@@ -193,34 +198,34 @@ const SkillsSection = () => {
                   </div>
 
                   {/* Skill Nodes */}
-                  {skillLayers[activeLayer].skills.map((skill, index) => (
+                  {skillLayers[activeLayer].skills.map((skill, index) => {
+                    const shouldShowAnimation = shouldAnimate && !reducedMotion;
+                    return (
                     <div
                       key={`${activeLayer}-${skill.name}`}
                       className={`absolute ${
-                        isMobile
-                          ? ""
-                          : "group cursor-pointer transition-all duration-700 ease-out"
+                        shouldAnimate
+                          ? "group cursor-pointer transition-transform duration-500 ease-out will-change-transform"
+                          : ""
                       }`}
                       style={{
                         left: `${skill.x * 16.66}%`,
                         top: `${skill.y * 25}%`,
-                        ...(isMobile
-                          ? { opacity: 1, transform: "scale(1)" }
-                          : {
+                        transform: 'translate3d(0, 0, 0)',
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                        ...(shouldShowAnimation
+                          ? {
                               opacity: 0,
-                              transform: "scale(0.8)",
-                              animation: `fadeInScale 0.6s ease-out ${
-                                index * 150
-                              }ms forwards`,
-                            }),
+                              animation: `fadeInScale 0.5s ease-out ${index * 100}ms forwards`,
+                            }
+                          : { opacity: 1 }),
                       }}
-                      onMouseEnter={() =>
-                        !isMobile && setHoveredSkill(skill.name)
-                      }
-                      onMouseLeave={() => !isMobile && setHoveredSkill(null)}
+                      onMouseEnter={() => shouldAnimate && setHoveredSkill(skill.name)}
+                      onMouseLeave={() => shouldAnimate && setHoveredSkill(null)}
                     >
                       {/* Ripple Effect - Desktop only */}
-                      {!isMobile && (
+                      {shouldAnimate && hoveredSkill === skill.name && (
                         <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div
                             className="absolute inset-0 rounded-full animate-ping"
@@ -245,12 +250,15 @@ const SkillsSection = () => {
                       {/* Main Node */}
                       <div
                         className={`relative w-20 h-20 rounded-full border-2 bg-white/95 dark:bg-background/95 ${
-                          isMobile
-                            ? ""
-                            : "backdrop-blur-sm group-hover:scale-110 group-hover:shadow-2xl transition-all duration-500 ease-out"
+                          shouldAnimate
+                            ? "backdrop-blur-sm group-hover:scale-110 transition-transform duration-300 ease-out will-change-transform"
+                            : ""
                         } flex flex-col items-center justify-center`}
                         style={{
                           borderColor: skill.color,
+                          transform: 'translate3d(0, 0, 0)',
+                          backfaceVisibility: 'hidden',
+                          WebkitBackfaceVisibility: 'hidden',
                           boxShadow:
                             hoveredSkill === skill.name
                               ? `0 0 30px ${skill.color}60, inset 0 0 20px ${skill.color}10`
@@ -262,14 +270,14 @@ const SkillsSection = () => {
                         </div>
                         <div
                           className={`text-xs font-mono font-bold mt-1 ${
-                            isMobile ? "" : "transition-all duration-300"
+                            shouldAnimate ? "transition-transform duration-200" : ""
                           }`}
                           style={{
                             color: skill.color,
                             transform:
-                              !isMobile && hoveredSkill === skill.name
-                                ? "scale(1.2)"
-                                : "scale(1)",
+                              shouldAnimate && hoveredSkill === skill.name
+                                ? "scale(1.2) translate3d(0, 0, 0)"
+                                : "scale(1) translate3d(0, 0, 0)",
                           }}
                         >
                           {skill.level}%
@@ -277,7 +285,7 @@ const SkillsSection = () => {
                       </div>
 
                       {/* Skill Info Popup - Desktop only */}
-                      {!isMobile && hoveredSkill === skill.name && (
+                      {shouldAnimate && hoveredSkill === skill.name && (
                         <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 z-20 animate-in fade-in slide-in-from-bottom-2 duration-200">
                           <div
                             className="px-3 py-2 rounded-lg text-white text-xs font-medium whitespace-nowrap shadow-lg"
@@ -299,7 +307,7 @@ const SkillsSection = () => {
                       )}
 
                       {/* Subtle Glow Effect - Desktop only */}
-                      {!isMobile && hoveredSkill === skill.name && (
+                      {shouldAnimate && hoveredSkill === skill.name && (
                         <div
                           className="absolute -inset-4 rounded-full opacity-30 animate-pulse pointer-events-none"
                           style={{
@@ -309,16 +317,17 @@ const SkillsSection = () => {
                         />
                       )}
                     </div>
-                  ))}
+                  );})}
 
                   {/* Central Core Dot */}
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                     <div
                       className={`w-4 h-4 bg-primary rounded-full ${
-                        isMobile ? "" : "animate-pulse"
+                        shouldAnimate ? "animate-pulse" : ""
                       }`}
+                      style={{ transform: 'translate3d(0, 0, 0)' }}
                     />
-                    {!isMobile && (
+                    {shouldAnimate && (
                       <div
                         className="absolute inset-0 w-8 h-8 border-2 border-primary/40 rounded-full animate-ping"
                         style={{ animationDuration: "2s" }}

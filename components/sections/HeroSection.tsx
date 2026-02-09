@@ -1,9 +1,47 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Mail, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+
+const DecryptText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
+  const [displayText, setDisplayText] = useState("");
+  const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`";
+
+  useEffect(() => {
+    let iteration = 0;
+    const interval = setInterval(() => {
+      setDisplayText(
+        text
+          .split("")
+          .map((char, index) => {
+            if (char === " ") return " ";
+            if (index < iteration) return text[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("")
+      );
+
+      if (iteration >= text.length) {
+        clearInterval(interval);
+      }
+      iteration += 1 / 3;
+    }, 30);
+
+    const timeout = setTimeout(() => {
+      return () => clearInterval(interval);
+    }, delay);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [text, delay]);
+
+  return <>{displayText}</>;
+};
 
 const HeroSection = () => {
   return (
@@ -13,11 +51,13 @@ const HeroSection = () => {
           <div className="space-y-8 fade-in-up">
             <div className="space-y-6">
               <h1 className="font-playfair text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
-                <div className="animate-[fadeInUp_0.8s_ease-out_0.2s_both]">
-                  Code. Deploy.
+                <div>
+                  <DecryptText text="Code. Deploy." delay={200} />
                 </div>
-                <div className="animate-[fadeInUp_0.8s_ease-out_0.6s_both]">
-                  <span className="gradient-text">Innovate.</span>
+                <div>
+                  <span className="gradient-text">
+                    <DecryptText text="Innovate." delay={800} />
+                  </span>
                 </div>
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-source-sans leading-relaxed max-w-2xl">
@@ -86,9 +126,12 @@ const HeroSection = () => {
                 priority
                 quality={90}
                 sizes="(max-width: 640px) 280px, (max-width: 1024px) 350px, 450px"
-                className="relative w-full h-full object-contain animate-[heroLanding_1.5s_ease-out_0.3s_both] transition-all duration-[800ms] ease-in-out group-hover:scale-[1.03] drop-shadow-[0_8px_25px_rgba(0,0,0,0.15)] z-10"
+                className="relative w-full h-full object-contain smooth-image-load transition-all duration-[800ms] ease-in-out group-hover:scale-[1.03] drop-shadow-[0_8px_25px_rgba(0,0,0,0.15)] z-10"
                 style={{
                   backgroundColor: "transparent",
+                }}
+                onLoad={(e) => {
+                  e.currentTarget.classList.add('loaded');
                 }}
               />
             </div>

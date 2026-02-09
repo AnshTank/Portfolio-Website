@@ -71,14 +71,6 @@ const ProjectsPage = () => {
       githubUrl: "https://github.com/AnshTank/Never-Break-The-Chain",
     },
     {
-      title: "Vacant - Property Management",
-      description:
-        "Modern property management platform for vacation rentals. Features include property listings, booking management, real-time availability, secure payments, and comprehensive dashboard for property owners.",
-      tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT", "Socket.io"],
-      image: "/vacation-rental-dashboard (2).png",
-      githubUrl: "https://github.com/AnshTank/Vacation-Rental-App",
-    },
-    {
       title: "HOP-11: Nurse Handoff Companion",
       description:
         "Web-based platform for nurses to manage shift handoffs efficiently. Features include patient record management, real-time updates, and secure data handling with React and MongoDB.",
@@ -93,6 +85,14 @@ const ProjectsPage = () => {
       image: "/hop11-dashboard.png",
       liveUrl: "https://hop-q77u-git-main-ansh-tanks-projects.vercel.app",
       githubUrl: "https://github.com/AnshTank/HOP",
+    },
+    {
+      title: "Vacant - Property Management",
+      description:
+        "Modern property management platform for vacation rentals. Features include property listings, booking management, real-time availability, secure payments, and comprehensive dashboard for property owners.",
+      tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT", "Socket.io"],
+      image: "/vacation-rental-dashboard (2).png",
+      githubUrl: "https://github.com/AnshTank/Vacation-Rental-App",
     },
     {
       title: "MindMingle",

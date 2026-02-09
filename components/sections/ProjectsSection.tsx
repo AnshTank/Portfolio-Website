@@ -8,6 +8,13 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import Link from "next/link";
 import type { Project } from "@/types";
 
@@ -47,12 +54,20 @@ const ProjectsSection = () => {
       githubUrl: "https://github.com/AnshTank/Never-Break-The-Chain",
     },
     {
-      title: "Vacant - Property Management",
+      title: "HOP-11: Nurse Handoff Companion",
       description:
-        "Modern property management platform for vacation rentals. Features include property listings, booking management, real-time availability, secure payments, and comprehensive dashboard for property owners.",
-      tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT", "Socket.io"],
-      image: "/vacation-rental-dashboard (2).png",
-      githubUrl: "https://github.com/AnshTank/Vacation-Rental-App",
+        "Web-based platform for nurses to manage shift handoffs efficiently. Features include patient record management, real-time updates, and secure data handling with React and MongoDB.",
+      tech: [
+        "Next.js",
+        "Typescript",
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Express.js",
+      ],
+      image: "/hop11-dashboard.png",
+      liveUrl: "https://hop-q77u-git-main-ansh-tanks-projects.vercel.app",
+      githubUrl: "https://github.com/AnshTank/HOP",
     },
   ];
 
@@ -69,77 +84,120 @@ const ProjectsSection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <Card
-                key={project.title}
-                className="card-hover group overflow-hidden border-primary/10 hover:border-primary/30 flex flex-col h-full"
-              >
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <CardHeader className="flex-grow">
-                  <CardTitle className="font-playfair gradient-text">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="font-source-sans">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4 mt-auto">
-                  <div className="flex flex-wrap gap-2 max-h-16 overflow-hidden">
-                    {project.tech.slice(0, 6).map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="outline"
-                        className="shimmer-effect"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                    {project.tech.length > 6 && (
-                      <Badge variant="secondary" className="text-xs">
-                        +{project.tech.length - 6} more
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="flex gap-2 pt-2">
-                    {project.liveUrl && (
-                      <Button size="sm" className="flex-1" asChild>
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          Live Demo
-                        </a>
-                      </Button>
-                    )}
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1"
-                      asChild
-                    >
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="mr-2 h-4 w-4" />
-                        Code
-                      </a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <TooltipProvider>
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {projects.map((project) => (
+                <Card
+                  key={project.title}
+                  className="card-hover group overflow-hidden border-primary/10 hover:border-primary/30 transition-all duration-300 flex flex-col h-full hover:shadow-xl hover:shadow-primary/10"
+                >
+                  <HoverCard>
+                    <HoverCardTrigger asChild>
+                      <div className="aspect-video overflow-hidden cursor-pointer">
+                        <img
+                          src={project.image || "/placeholder.svg"}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-80">
+                      <div className="space-y-2">
+                        <h4 className="text-sm font-semibold">{project.title}</h4>
+                        <p className="text-xs text-muted-foreground">{project.description}</p>
+                      </div>
+                    </HoverCardContent>
+                  </HoverCard>
+                  <CardHeader className="flex-grow">
+                    <CardTitle className="font-playfair gradient-text">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="font-source-sans">
+                      {project.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4 mt-auto">
+                    <div className="flex flex-wrap gap-2 max-h-16 overflow-hidden">
+                      {project.tech.slice(0, 6).map((tech) => (
+                        <Tooltip key={tech}>
+                          <TooltipTrigger asChild>
+                            <Badge
+                              variant="outline"
+                              className="shimmer-effect cursor-help hover:bg-primary/10 transition-colors"
+                            >
+                              {tech}
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Technology: {tech}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      ))}
+                      {project.tech.length > 6 && (
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Badge variant="secondary" className="text-xs cursor-help">
+                              +{project.tech.length - 6} more
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <div className="space-y-1">
+                              {project.tech.slice(6).map((tech) => (
+                                <p key={tech} className="text-xs">{tech}</p>
+                              ))}
+                            </div>
+                          </TooltipContent>
+                        </Tooltip>
+                      )}
+                    </div>
+                    <div className="flex gap-2 pt-2">
+                      {project.liveUrl && (
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button size="sm" className="flex-1" asChild>
+                              <a
+                                href={project.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <ExternalLink className="mr-2 h-4 w-4" />
+                                Live Demo
+                              </a>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View live project</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      )}
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1"
+                            asChild
+                          >
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <Github className="mr-2 h-4 w-4" />
+                              Code
+                            </a>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>View source code on GitHub</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TooltipProvider>
 
           <div className="text-center pt-8">
             <Button
